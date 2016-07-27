@@ -1,0 +1,24 @@
+{
+  "name": "iloveit",
+  "version": "0.0.1",
+  "description": "A sample Node.js app",
+  "engines": {
+    "node": "6.3.1"
+  },
+  "main": "start-up.js",
+  "scripts": {
+    "start": "node start-up.js"
+  },
+  "dependencies": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kwalter37/iloveit"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "express"
+  ],
+  "license": "MIT"
+}
