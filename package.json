@@ -10,6 +10,9 @@
     "start": "node start-up.js"
   },
   "dependencies": {
+    "body-parser": "^1.13.3",
+    "express": "^4.13.3",
+    "mongodb": "^2.1.6"
   },
   "repository": {
     "type": "git",
