@@ -45,7 +45,14 @@ function handleError(res, reason, message, code) {
  */
 
 app.get("/products", function(req, res) {
-  db.collection(PRODUCTS_COLLECTION).find({}).toArray(function(err, docs) {
+  console.log(request.query);
+  var filter = {};
+  //se any filters as appropriate
+  //TODO: Allow for other filters as well
+  if (req.query.category) {
+    filter = {"category": req.query.category};
+  }
+  db.collection(PRODUCTS_COLLECTION).find(filter).toArray(function(err, docs) {
     if (err) {
       handleError(res, err.message, "Failed to get contacts.");
     } else {
