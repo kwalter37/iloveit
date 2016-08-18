@@ -45,7 +45,7 @@ function handleError(res, reason, message, code) {
  */
 
 app.get("/products", function(req, res) {
-  console.log(request.query);
+  console.log(req.query);
   var filter = {};
   //se any filters as appropriate
   //TODO: Allow for other filters as well
