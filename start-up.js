@@ -77,11 +77,35 @@ app.post("/products", function(req, res) {
  *    DELETE: deletes contact by id
  */
 
-//app.get("/products/:id", function(req, res) {
-//});
+app.get("/products/:id", function(req, res) {
+  db.collection(PRODUCTS_COLLECTION).findOne({ _id: new ObjectID(req.params.id) }, function(err, doc) {
+    if (err) {
+      handleError(res, err.message, "Failed to get product");
+    } else {
+      res.status(200).json(doc);
+    }
+  });
+});
 
-//app.put("/products/:id", function(req, res) {
-//});
+app.put("/products/:id", function(req, res) {
+  var updateDoc = req.body;
+  delete updateDoc._id;
 
-//app.delete("/products/:id", function(req, res) {
-//});
+  db.collection(PRODUCTS_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, updateDoc, function(err, doc) {
+    if (err) {
+      handleError(res, err.message, "Failed to update contact");
+    } else {
+      res.status(204).end();
+    }
+  });
+});
+
+app.delete("/products/:id", function(req, res) {
+  db.collection(PRODUCTS_COLLECTION).deleteOne({_id: new ObjectID(req.params.id)}, function(err, result) {
+    if (err) {
+      handleError(res, err.message, "Failed to delete contact");
+    } else {
+      res.status(204).end();
+    }
+  });
+});
