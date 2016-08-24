@@ -3,8 +3,11 @@ var path = require("path");
 var bodyParser = require("body-parser");
 var mongodb = require("mongodb");
 var ObjectID = mongodb.ObjectID;
+var _ = require("underscore");
 
 var PRODUCTS_COLLECTION = "products";
+
+var PRODUCTS_FILTERS = ["category", "rating"];
 
 var app = express();
 app.use(express.static(__dirname + "/public"));
@@ -39,6 +42,11 @@ function handleError(res, reason, message, code) {
   res.status(code || 500).json({"error": message});
 }
 
+// from queryParams, return only valid ones
+function getFilterParams(queryParams) {
+  return _.pick(queryParams, PRODUCTS_FILTERS);
+}
+
 /*  "/products"
  *    GET: finds all products
  *    POST: creates a new contact
@@ -46,12 +54,14 @@ function handleError(res, reason, message, code) {
 
 app.get("/products", function(req, res) {
   console.log(req.query);
-  var filter = {};
-  //se any filters as appropriate
+  //var filter = {};
+  //set any filters as appropriate
   //TODO: Allow for other filters as well
-  if (req.query.category) {
-    filter = {"category": req.query.category};
-  }
+  //if (req.query.category) {
+  // filter = {"category": req.query.category};
+  //}
+  var filter = getFilterParams(req.query);
+  
   db.collection(PRODUCTS_COLLECTION).find(filter).toArray(function(err, docs) {
     if (err) {
       handleError(res, err.message, "Failed to get contacts.");
