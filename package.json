@@ -7,13 +7,22 @@
   },
   "main": "start-up.js",
   "scripts": {
-    "start": "node start-up.js"
+    "start": "node start-up.js",
+    "test": "./node_modules/mocha/bin/mocha test"
   },
   "dependencies": {
     "body-parser": "^1.13.3",
     "express": "^4.13.3",
     "mongodb": "^2.1.6",
     "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "chai": "*",
+    "karma": "*",
+    "karma-mocha": "^1.1.1",
+    "karma-phantomjs-launcher": "^1.0.1",
+    "karma-requirejs": "^1.0.0",
+    "mocha": "*"
   },
   "repository": {
     "type": "git",

@@ -3,7 +3,8 @@ var path = require("path");
 var bodyParser = require("body-parser");
 var mongodb = require("mongodb");
 var ObjectID = mongodb.ObjectID;
-var _ = require("underscore");
+
+var utils = require("./utils.js");
 
 var PRODUCTS_COLLECTION = 'products';
 var PRODUCTS_FILTERS = {category: 'string', rating: 'int'};
@@ -41,22 +42,6 @@ function handleError(res, reason, message, code) {
   res.status(code || 500).json({'error': message});
 }
 
-// from queryParams, return only valid ones
-function getFilterParams(queryParams) {
-  var filterKeys = _.keys(PRODUCTS_FILTERS);
-  var validFilters = _.pick(queryParams, filterKeys);
-
-  //we will get numbers as strings, so need to convert
-  return _.mapObject(validFilters, function (val, key) {
-      if (PRODUCTS_FILTERS[key] === 'int') {
-        return parseInt(val, 10);
-      }
-      else {
-        return val;
-      }
-  });
-}
-
 /*  "/products"
  *    GET: finds all products
  *    POST: creates a new contact
@@ -70,7 +55,7 @@ app.get('/products', function(req, res) {
   //if (req.query.category) {
   // filter = {"category": req.query.category};
   //}
-  var filter = getFilterParams(req.query);
+  var filter = utils.getFilterParams(req.query, PRODUCTS_FILTERS);
 
   db.collection(PRODUCTS_COLLECTION).find(filter).toArray(function(err, docs) {
     if (err) {
