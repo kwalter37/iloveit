@@ -56,8 +56,9 @@ app.get('/products', function(req, res) {
   // filter = {"category": req.query.category};
   //}
   var filter = utils.getFilterParams(req.query, PRODUCTS_FILTERS);
+  var options = {sort: [['brand','asc'], ['name', 'asc']]};
 
-  db.collection(PRODUCTS_COLLECTION).find(filter).toArray(function(err, docs) {
+  db.collection(PRODUCTS_COLLECTION).find(filter, options).toArray(function(err, docs) {
     if (err) {
       handleError(res, err.message, 'Failed to get contacts.');
     } else {
