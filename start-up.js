@@ -127,7 +127,7 @@ app.delete('/products/:id', function(req, res) {
  *    GET: finds all distinct product categories
  */
 
-app.get('/products/categories', function(req, res) {
+app.get('/categories', function(req, res) {
   console.log(req.query);
   db.collection(PRODUCTS_COLLECTION).distinct("Category",(function(err, docs){
     if (err) {
