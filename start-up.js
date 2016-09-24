@@ -133,6 +133,7 @@ app.get('/categories', function(req, res) {
     if (err) {
       handleError(res, err.message, 'Failed to get categories.');
     } else {
+      console.log(docs);
       res.status(200).json(docs);
     }
   }));
