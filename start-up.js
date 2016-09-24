@@ -129,7 +129,7 @@ app.delete('/products/:id', function(req, res) {
 
 app.get('/categories', function(req, res) {
   console.log(req.query);
-  db.collection(PRODUCTS_COLLECTION).distinct("Category",(function(err, docs){
+  db.collection(PRODUCTS_COLLECTION).distinct("category",(function(err, docs){
     if (err) {
       handleError(res, err.message, 'Failed to get categories.');
     } else {
