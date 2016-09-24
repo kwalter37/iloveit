@@ -122,3 +122,19 @@ app.delete('/products/:id', function(req, res) {
     }
   });
 });
+
+/*  "/products/categories"
+ *    GET: finds all distinct product categories
+ */
+
+app.get('/products/categories', function(req, res) {
+  console.log(req.query);
+  db.collection(PRODUCTS_COLLECTION).distinct("Category",(function(err, docs){
+    if (err) {
+      handleError(res, err.message, 'Failed to get categories.');
+    } else {
+      res.status(200).json(docs);
+    }
+  }));
+
+});
