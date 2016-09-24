@@ -134,7 +134,7 @@ app.get('/categories', function(req, res) {
       handleError(res, err.message, 'Failed to get categories.');
     } else {
       console.log(docs);
-      res.status(200).json(docs);
+      res.status(200).json(docs.sort());
     }
   }));
 
