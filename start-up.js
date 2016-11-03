@@ -2,6 +2,7 @@ var express = require("express");
 var path = require("path");
 var bodyParser = require("body-parser");
 var mongodb = require("mongodb");
+var cors = require('cors')
 var ObjectID = mongodb.ObjectID;
 
 var utils = require("./utils.js");
@@ -10,6 +11,7 @@ var PRODUCTS_COLLECTION = 'products';
 var PRODUCTS_FILTERS = {category: 'string', rating: 'int'};
 
 var app = express();
+app.use(cors());
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 
